@@ -6,9 +6,12 @@ import subprocess
 from subprocess import Popen, PIPE
 
 
-def create_server():
-    f = Popen(['python','-m', 'http.server','8000'])
-    print("server created")
+def create_server(n):
+    if n==1:
+        f = Popen(['python','-m', 'http.server','8000'])
+        print("server created")
+    elif n==0:
+        Popen.kill(f)
 
 count = 1
 def fun(count):
@@ -36,5 +39,10 @@ TO CONFIRM TO USE THIS TOOL ONLY FOR EDUCAIONAL PURPOSE ''')
 if i=="AGREE":
     driver =  webdriver.Chrome()
     driver.get('https://web.whatsapp.com/')
-    create_server()
+    create_server(1)
+    print('Cntrl + c to exit')
     fun(count)
+
+while KeyboardInterrupt:
+    create_server(0)
+
